@@ -1,0 +1,157 @@
+/* ==========================================================================
+   ANIMACIONES · Entrada de la portada, aparición al scroll, diana, ruta y
+   retrato. Solo se animan transform, opacity y el trazo SVG de la ruta.
+   La única curva es --ease-out y las duraciones salen de tokens.css.
+   ========================================================================== */
+
+/* ========== APARICIÓN AL HACER SCROLL ========== */
+/* La clase .js la agrega un pequeño script en el <head>. Sin JavaScript el
+   contenido queda visible: el estado oculto depende de html.js. */
+html.js [data-reveal] {
+  opacity: 0;
+  transform: translate3d(0, var(--reveal-distancia), 0);
+  transition:
+    opacity var(--duracion-entrada) var(--ease-out)
+      calc(var(--i, 0) * var(--reveal-escalon)),
+    transform var(--duracion-entrada) var(--ease-out)
+      calc(var(--i, 0) * var(--reveal-escalon));
+}
+
+html.js [data-reveal].esta-visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+/* ========== DIANA DE "POR QUÉ PUNTO ÓPTIMO" ========== */
+/* Los aros y las etiquetas aparecen cuando la escena entra en pantalla. La
+   escena completa ya tiene su propio reveal; esto suma una segunda capa. */
+html.js .por-que__aro,
+html.js .por-que__cruz {
+  opacity: 0;
+  transition: opacity var(--duracion-entrada-larga) var(--ease-out);
+}
+
+html.js .por-que__senal {
+  opacity: 0;
+  transform: translateY(8px);
+  transition:
+    opacity var(--duracion-entrada) var(--ease-out),
+    transform var(--duracion-entrada) var(--ease-out);
+}
+
+html.js .por-que__aro--1 {
+  transition-delay: 0.08s;
+}
+
+html.js .por-que__aro--2 {
+  transition-delay: 0.16s;
+}
+
+html.js .por-que__aro--3,
+html.js .por-que__cruz {
+  transition-delay: 0.24s;
+}
+
+html.js .por-que__senal--1 {
+  transition-delay: 0.3s;
+}
+
+html.js .por-que__senal--2 {
+  transition-delay: 0.38s;
+}
+
+html.js .por-que__senal--3 {
+  transition-delay: 0.46s;
+}
+
+html.js .por-que__senal--4 {
+  transition-delay: 0.54s;
+}
+
+html.js .por-que__escena.esta-visible .por-que__aro,
+html.js .por-que__escena.esta-visible .por-que__cruz,
+html.js .por-que__escena.esta-visible .por-que__senal {
+  opacity: 1;
+}
+
+html.js .por-que__escena.esta-visible .por-que__senal {
+  transform: translateY(0);
+}
+
+/* ========== RETRATO DE "QUIÉN ESTÁ DETRÁS" ========== */
+html.js .quien__retrato {
+  opacity: 0;
+  transform: rotate(-3deg) scale(0.97);
+  transition:
+    opacity var(--duracion-entrada-larga) var(--ease-out),
+    transform var(--duracion-entrada-larga) var(--ease-out);
+}
+
+html.js .quien__escena.esta-visible .quien__retrato {
+  opacity: 1;
+  transform: rotate(0deg) scale(1);
+}
+
+html.js .quien__sello {
+  opacity: 0;
+  transition:
+    opacity var(--duracion-entrada) var(--ease-out),
+    transform var(--duracion-entrada) var(--ease-out);
+}
+
+html.js .quien__sello--1 {
+  transform: translateY(8px) rotate(-4deg);
+  transition-delay: 0.18s;
+}
+
+html.js .quien__sello--2 {
+  transform: translateY(8px) rotate(3deg);
+  transition-delay: 0.28s;
+}
+
+html.js .quien__sello--3 {
+  transform: translateY(8px) rotate(-2deg);
+  transition-delay: 0.38s;
+}
+
+html.js .quien__escena.esta-visible .quien__sello--1 {
+  opacity: 1;
+  transform: rotate(-4deg);
+}
+
+html.js .quien__escena.esta-visible .quien__sello--2 {
+  opacity: 1;
+  transform: rotate(3deg);
+}
+
+html.js .quien__escena.esta-visible .quien__sello--3 {
+  opacity: 1;
+  transform: rotate(-2deg);
+}
+
+/* ========== MOVIMIENTO REDUCIDO ========== */
+/* Todo el contenido queda visible y sin transiciones, incluida la lupa y el
+   trazo completo de la ruta. */
+@media (prefers-reduced-motion: reduce) {
+  html.js [data-reveal],
+  html.js [data-reveal].esta-visible {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  html.js .por-que__aro,
+  html.js .por-que__cruz,
+  html.js .por-que__senal,
+  html.js .quien__retrato,
+  html.js .quien__sello {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .lupa__lente {
+    transform: none;
+    will-change: auto;
+  }
+}

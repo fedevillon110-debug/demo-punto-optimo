@@ -1,0 +1,654 @@
+/* ==========================================================================
+   COMPONENTES · Vidrio, navegación, botones, tarjetas, etiquetas y listas
+   ========================================================================== */
+
+/* ========== SUPERFICIE DE VIDRIO ========== */
+.vidrio {
+  position: relative;
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radio-lg);
+  background-color: var(--color-superficie);
+  box-shadow: var(--brillo-vidrio), var(--sombra-tarjeta);
+  -webkit-backdrop-filter: blur(var(--vidrio-blur)) saturate(var(--vidrio-saturacion));
+  backdrop-filter: blur(var(--vidrio-blur)) saturate(var(--vidrio-saturacion));
+}
+
+/* Sin backdrop-filter, el vidrio pierde transparencia para no romper el contraste. */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .vidrio {
+    background-color: var(--color-superficie-fuerte);
+  }
+}
+
+/* ========== ICONOS ========== */
+/* El sprite se define una vez en index.html y se reutiliza con <use>. */
+.sprite {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+.icono {
+  width: 1.15em;
+  height: 1.15em;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* El logo de WhatsApp de la referencia es una silueta rellena. */
+.icono--marca {
+  fill: currentColor;
+  stroke: none;
+}
+
+/* ========== MARCA / LOGO ========== */
+/* Los logos viven en assets/img. Reemplazarlos por archivos con el mismo
+   nombre actualiza la marca en toda la web sin tocar HTML ni CSS. */
+.marca {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  border-radius: var(--radio-sm);
+  text-decoration: none;
+}
+
+.marca:hover {
+  color: inherit;
+}
+
+.marca__imagen {
+  width: auto;
+  height: var(--tamano-logo);
+}
+
+/* ========== BARRA FLOTANTE ========== */
+.cabecera {
+  position: fixed;
+  top: calc(0.875rem + env(safe-area-inset-top));
+  right: 0;
+  left: 0;
+  z-index: var(--capa-nav);
+  padding-inline: var(--espacio-4);
+  pointer-events: none;
+}
+
+.nav {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--espacio-4);
+  width: 100%;
+  max-width: var(--ancho-nav);
+  min-height: var(--nav-alto);
+  margin-inline: auto;
+  padding: var(--espacio-2) 0.625rem var(--espacio-2) 1.375rem;
+  border: 1px solid var(--nav-borde);
+  border-radius: var(--radio-pildora);
+  background-color: var(--nav-fondo);
+  -webkit-backdrop-filter: blur(var(--vidrio-blur)) saturate(var(--vidrio-saturacion));
+  backdrop-filter: blur(var(--vidrio-blur)) saturate(var(--vidrio-saturacion));
+  pointer-events: auto;
+  transition:
+    background-color var(--duracion-lenta) var(--ease-out),
+    box-shadow var(--duracion-lenta) var(--ease-out);
+}
+
+/* Al bajar más de 24 px (valor en CONFIG.animaciones.barra) la píldora se
+   oscurece y gana sombra. La transición es suave y no mueve el layout. */
+.nav--scrolled {
+  background-color: var(--nav-fondo-scroll);
+  box-shadow: var(--nav-sombra);
+}
+
+.nav .marca__imagen {
+  height: 2.5rem;
+}
+
+.nav__lista {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  margin-inline: auto;
+}
+
+.nav__lista-cta {
+  display: none;
+}
+
+.nav__enlace {
+  display: flex;
+  align-items: center;
+  min-height: 2.5rem;
+  padding: 0.55rem 1rem;
+  border-radius: var(--radio-pildora);
+  color: var(--nav-texto);
+  font-family: var(--fuente-titulos);
+  font-size: var(--tamano-nav);
+  font-weight: var(--peso-medio);
+  line-height: 1;
+  text-decoration: none;
+  transition:
+    color var(--duracion-rapida) var(--ease-out),
+    background-color var(--duracion-rapida) var(--ease-out);
+}
+
+.nav__enlace:hover {
+  color: var(--nav-texto-activo);
+  background-color: var(--nav-hover);
+}
+
+.nav__enlace[aria-current="true"] {
+  color: var(--nav-texto-activo);
+  background-color: var(--nav-activo);
+}
+
+.nav__acciones {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: var(--espacio-2);
+}
+
+.nav .nav__cta {
+  min-height: 2.75rem;
+  padding: 0.7rem 1.25rem;
+  font-size: var(--tamano-nav);
+  white-space: nowrap;
+}
+
+.nav__cta-panel {
+  width: 100%;
+  justify-content: center;
+}
+
+/* Botón hamburguesa: 44 px, dos barras que se convierten en X. */
+.nav__boton {
+  display: none;
+  place-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.08);
+  cursor: pointer;
+}
+
+.nav__icono {
+  display: block;
+  width: var(--tamano-icono-menu);
+}
+
+.nav__icono span {
+  display: block;
+  width: 100%;
+  height: 2px;
+  margin: 5px auto;
+  border-radius: 1px;
+  background-color: var(--color-blanco);
+  transition: transform var(--duracion-lenta) var(--ease-out);
+}
+
+.nav--abierto .nav__icono span:first-child {
+  transform: translateY(3.5px) rotate(45deg);
+}
+
+.nav--abierto .nav__icono span:last-child {
+  transform: translateY(-3.5px) rotate(-45deg);
+}
+
+/* En anchos intermedios la barra se compacta para que los seis rótulos y el
+   botón entren en una sola línea sin cambiar los títulos de las secciones. */
+@media (min-width: 901px) and (max-width: 1080px) {
+  .nav {
+    gap: var(--espacio-2);
+    padding-left: 1rem;
+  }
+
+  .nav .marca__imagen {
+    height: 2.25rem;
+  }
+
+  .nav__lista {
+    gap: 0;
+  }
+
+  .nav__enlace {
+    padding-inline: 0.6rem;
+    font-size: 0.8125rem;
+  }
+
+  .nav .nav__cta {
+    padding-inline: 0.8rem;
+    font-size: 0.8125rem;
+  }
+}
+
+/* ========== MENÚ FLOTANTE EN CELULAR (≤ 900 px) ========== */
+@media (max-width: 900px) {
+  .nav {
+    gap: var(--espacio-2);
+    padding-left: 1.125rem;
+  }
+
+  .nav__acciones {
+    margin-left: auto;
+  }
+
+  /* El botón de WhatsApp de la barra queda solo con el ícono, en círculo. */
+  .nav .nav__cta {
+    width: 2.75rem;
+    height: 2.75rem;
+    padding: 0;
+    border-radius: 50%;
+  }
+
+  .nav .nav__cta .boton__texto {
+    display: none;
+  }
+
+  .nav__boton {
+    display: grid;
+  }
+
+  /* Panel flotante debajo de la píldora. Cerrado queda oculto y no enfocable
+     (visibility: hidden); abierto entra desde la esquina superior derecha. */
+  .nav__lista {
+    position: absolute;
+    top: calc(100% + 0.625rem);
+    right: 0;
+    left: 0;
+    display: grid;
+    gap: 0.25rem;
+    margin: 0;
+    padding: 0.75rem;
+    border: 1px solid var(--nav-menu-borde);
+    border-radius: 1.5rem;
+    background-color: var(--nav-menu);
+    box-shadow: var(--nav-menu-sombra);
+    opacity: 0;
+    visibility: hidden;
+    transform: translate3d(0, -8px, 0) scale(0.98);
+    transform-origin: top right;
+    pointer-events: none;
+    transition:
+      opacity var(--duracion-rapida) var(--ease-out),
+      transform var(--duracion-lenta) var(--ease-out),
+      visibility 0s var(--duracion-lenta);
+  }
+
+  .nav--abierto .nav__lista {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    pointer-events: auto;
+    transition:
+      opacity var(--duracion-rapida) var(--ease-out),
+      transform var(--duracion-lenta) var(--ease-out),
+      visibility 0s;
+  }
+
+  .nav__enlace {
+    min-height: 0;
+    padding: 0.875rem 1rem;
+    border-radius: 0.875rem;
+    color: #e4f0f7;
+    font-size: 1.0625rem;
+  }
+
+  .nav__enlace:hover,
+  .nav__enlace[aria-current="true"] {
+    background-color: var(--nav-hover);
+  }
+
+  .nav__lista-cta {
+    display: block;
+    margin-top: 0.375rem;
+  }
+
+  /* Sin JavaScript el menú no puede abrirse: se muestra en el flujo y la
+     cabecera deja de ser fija para no tapar la portada. */
+  html:not(.js) .cabecera {
+    position: static;
+    padding-top: var(--espacio-4);
+    padding-inline: 0;
+  }
+
+  html:not(.js) .nav {
+    max-width: none;
+    flex-wrap: wrap;
+    padding: var(--espacio-3) var(--espacio-4);
+    border-radius: 0;
+  }
+
+  html:not(.js) .nav__boton {
+    display: none;
+  }
+
+  html:not(.js) .nav__lista {
+    position: static;
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-top: var(--espacio-2);
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    pointer-events: auto;
+    transition: none;
+  }
+
+  html:not(.js) .nav__enlace {
+    padding: 0.5rem 0.75rem;
+    font-size: var(--tamano-sm);
+  }
+
+  html:not(.js) .nav__lista-cta {
+    display: none;
+  }
+
+  html:not(.js) .nav .nav__cta {
+    width: auto;
+    height: auto;
+    padding: 0.7rem 1rem;
+    border-radius: var(--radio-pildora);
+  }
+
+  html:not(.js) .nav .nav__cta .boton__texto {
+    display: inline;
+  }
+}
+
+/* ========== BOTONES ========== */
+.boton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.625rem;
+  min-height: var(--altura-control);
+  padding: 0.8rem 1.35rem;
+  border: 1px solid transparent;
+  border-radius: var(--radio-pildora);
+  font-family: var(--fuente-titulos);
+  font-size: var(--tamano-sm);
+  font-weight: var(--peso-semi);
+  letter-spacing: 0.01em;
+  line-height: 1.2;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    transform var(--duracion-media) var(--ease-out),
+    background-color var(--duracion-rapida) var(--ease-out),
+    border-color var(--duracion-rapida) var(--ease-out),
+    color var(--duracion-rapida) var(--ease-out);
+}
+
+.boton__icono {
+  flex: 0 0 auto;
+  width: 1.25rem;
+  height: 1.25rem;
+  transition: transform var(--duracion-media) var(--ease-out);
+}
+
+.boton--primario {
+  background-color: var(--color-agua);
+  color: #032b2b;
+}
+
+.boton--primario:hover {
+  background-color: var(--color-agua-claro);
+  color: #032b2b;
+}
+
+.boton--secundario {
+  border-color: rgba(255, 255, 255, 0.4);
+  background-color: transparent;
+  color: var(--color-blanco);
+}
+
+.boton--secundario:hover {
+  border-color: rgba(255, 255, 255, 0.72);
+  background-color: rgba(255, 255, 255, 0.1);
+  color: var(--color-blanco);
+}
+
+/* Botón de agua: se usa sobre la banda oscura de contacto. */
+.boton--agua {
+  background-color: var(--color-agua);
+  color: #032b2b;
+}
+
+.boton--agua:hover {
+  background-color: var(--color-agua-claro);
+  color: #032b2b;
+}
+
+.boton--grande {
+  min-height: var(--altura-control-grande);
+  padding: 1rem 1.7rem;
+  font-size: var(--tamano-lg);
+}
+
+@media (hover: hover) {
+  .boton:hover {
+    transform: translateY(-2px);
+  }
+
+  .boton:hover .boton__icono {
+    transform: scale(1.1);
+  }
+}
+
+/* En pantallas muy angostas el botón grande baja un punto el cuerpo y el aire
+   lateral para que "Escribime" entre cómodo en una sola línea. */
+@media (max-width: 374px) {
+  .boton--grande {
+    padding-inline: 1rem;
+    font-size: var(--tamano-base);
+  }
+}
+
+/* ========== ETIQUETAS ========== */
+.etiqueta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--espacio-2);
+  width: fit-content;
+  padding: 0.35rem 0.8rem;
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radio-pildora);
+  background-color: var(--color-tarjeta-tenue);
+  color: var(--color-titulo);
+  font-family: var(--fuente-titulos);
+  font-size: var(--tamano-xs);
+  font-weight: var(--peso-semi);
+  letter-spacing: var(--interletrado-etiqueta);
+  line-height: 1.3;
+  text-transform: uppercase;
+}
+
+.etiqueta::before {
+  content: "";
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 50%;
+  background: var(--gradiente-marca);
+}
+
+/* ========== TARJETAS ========== */
+.tarjeta {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-2);
+  padding: clamp(var(--espacio-5), 3.5vw, var(--espacio-6));
+  border: 1px solid var(--color-tarjeta-borde);
+  border-radius: var(--radio-tarjeta);
+  background-color: var(--color-tarjeta);
+  box-shadow: var(--sombra-tarjeta-suave);
+  transition: translate var(--duracion-media) var(--ease-out);
+}
+
+@media (hover: hover) {
+  .tarjeta:hover {
+    translate: 0 -4px;
+  }
+}
+
+/* Icono de lente: círculo con degradado, aro blanco y mango inclinado. */
+.tarjeta__icono {
+  position: relative;
+  display: grid;
+  flex: 0 0 auto;
+  place-items: center;
+  width: 4rem;
+  height: 4rem;
+  margin-bottom: var(--espacio-4);
+  padding: 3px;
+  border-radius: 50%;
+  background: linear-gradient(160deg, var(--color-agua), var(--color-azul));
+}
+
+.tarjeta__icono::after {
+  content: "";
+  position: absolute;
+  top: 79.7%;
+  left: 79.7%;
+  width: 37.5%;
+  height: 10.9%;
+  border-radius: 3px;
+  background-color: var(--color-azul);
+  transform: rotate(45deg);
+  transform-origin: 0 50%;
+}
+
+.tarjeta__icono .icono {
+  width: 100%;
+  height: 100%;
+  padding: 0.9rem;
+  border-radius: 50%;
+  background-color: var(--color-tarjeta);
+  color: var(--color-azul);
+  stroke-width: 1.75;
+}
+
+.tarjeta__titulo {
+  margin: 0;
+  font-size: clamp(1.15rem, 2.2vw, 1.3125rem);
+}
+
+.tarjeta__texto {
+  color: var(--color-texto-suave);
+}
+
+/* Enlace de acción al pie de la tarjeta (lleva a WhatsApp con un mensaje
+   según el público). */
+.tarjeta__enlace {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--espacio-2);
+  margin-top: auto;
+  padding-top: var(--espacio-3);
+  color: var(--color-enlace);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.tarjeta__enlace .icono {
+  width: 1.1rem;
+  height: 1.1rem;
+  transition: transform var(--duracion-media) var(--ease-out);
+}
+
+.tarjeta__enlace:hover {
+  color: var(--color-enlace-hover);
+  text-decoration: underline;
+}
+
+.tarjeta__enlace:hover .icono {
+  transform: translate(2px, -2px);
+}
+
+/* ========== LISTAS CON MARCADOR ========== */
+.lista {
+  display: grid;
+  gap: var(--espacio-2);
+}
+
+.lista__item {
+  position: relative;
+  padding-left: 1.15rem;
+  color: var(--color-texto-suave);
+}
+
+.lista__item::before {
+  content: "";
+  position: absolute;
+  top: 0.65em;
+  left: 0;
+  width: 0.4rem;
+  height: 0.4rem;
+  border-radius: 50%;
+  background-color: var(--color-agua-oscuro);
+}
+
+@media (prefers-color-scheme: dark) {
+  .lista__item::before {
+    background-color: var(--color-agua-claro);
+  }
+
+  .tarjeta__icono .icono {
+    color: var(--color-azul-claro);
+  }
+}
+
+/* ========== AVISO DE DATOS PENDIENTES ========== */
+.aviso {
+  max-width: 46rem;
+  padding: var(--espacio-3) var(--espacio-4);
+  border: 1px dashed var(--color-borde-tenue);
+  border-radius: var(--radio-sm);
+  color: var(--color-texto-suave);
+  font-size: var(--tamano-xs);
+}
+
+/* ========== PÁGINA DE ERROR ========== */
+.pagina-error {
+  display: grid;
+  place-items: center;
+  min-height: 100svh;
+  padding: calc(var(--nav-alto) + var(--espacio-8)) var(--espacio-4)
+    calc(var(--espacio-8) + env(safe-area-inset-bottom));
+}
+
+.pagina-error__panel {
+  display: grid;
+  justify-items: center;
+  gap: var(--espacio-4);
+  width: min(100%, var(--ancho-panel-error));
+  padding: clamp(var(--espacio-6), 7vw, var(--espacio-9));
+  text-align: center;
+}
+
+.pagina-error__marca .marca__imagen {
+  height: var(--tamano-logo-escritorio);
+}
+
+.pagina-error h1 {
+  max-width: 18ch;
+  font-size: clamp(2rem, 5vw, 3rem);
+}
+
+.pagina-error__texto {
+  max-width: 36ch;
+  color: var(--color-texto-suave);
+}

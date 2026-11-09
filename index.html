@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+  <!-- ========== METADATOS ========== -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Punto Óptimo | Sueldos, administración y RRHH</title>
+  <meta name="description" content="Liquidación de sueldos, administración y selección de personal para comercios, pymes y estudios contables. Atención 100% online.">
+
+  <!-- Quitar esta línea y habilitar robots.txt al lanzar el sitio -->
+  <meta name="robots" content="noindex, nofollow">
+
+  <meta name="theme-color" content="#f6f7f3" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#05111a" media="(prefers-color-scheme: dark)">
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+
+  <!-- Open Graph: las URL se completan desde js/config.js cuando
+       CONFIG.dominioPublicado sea true. El título y la descripción son fijos. -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Punto Óptimo">
+  <meta property="og:title" content="Punto Óptimo | Sueldos, administración y RRHH">
+  <meta property="og:description" content="Liquidación de sueldos, administración y selección de personal para comercios, pymes y estudios contables. Atención 100% online.">
+  <meta property="og:locale" content="es_AR">
+  <meta property="og:url" content="">
+  <meta property="og:image" content="">
+  <link rel="canonical" data-canonical>
+
+  <!-- ========== TIPOGRAFÍAS ========== -->
+  <!-- Se cargan desde Google Fonts. Para pasarlas a assets/fonts/ seguir las
+       instrucciones del comentario al final de css/base.css. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- ========== ESTILOS ========== -->
+  <link rel="stylesheet" href="css/diseno.css">
+  <link rel="stylesheet" href="css/cv.css">
+
+  <script>document.documentElement.classList.add("js");</script>
+</head>
+<body>
+<div id="demo-aviso" style="position:fixed;left:50%;bottom:.8rem;translate:-50% 0;z-index:9999;max-width:min(94vw,34rem);padding:.5rem .9rem;border-radius:999px;background:#04345c;color:#fff;font:500 .78rem/1.35 system-ui,sans-serif;box-shadow:0 10px 30px rgba(0,0,0,.35);text-align:center">Versión de <b>demostración</b> con datos de ejemplo · Panel: <a href="panel/" style="color:#59d1c5;font-weight:700">abrir</a> (usuario <b>admin</b> · clave <b>admin</b>)<button type="button" aria-label="Cerrar aviso" onclick="this.parentNode.remove()" style="margin-left:.6rem;border:0;background:transparent;color:#fff;font:700 1rem/1 system-ui;cursor:pointer;padding:.1rem .3rem;vertical-align:middle">×</button></div>
+<a class="saltar-enlace" href="#inicio">Saltar al contenido</a>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="wa" viewBox="0 0 24 24"><path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.64.07-.3-.15-1.26-.46-2.39-1.48-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.6.13-.14.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.61-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.21 3.07c.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.7.63.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2-1.41.25-.7.25-1.29.17-1.41-.07-.12-.27-.2-.57-.35M12.05 21.78a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.89 9.89-9.89 2.64 0 5.12 1.03 6.99 2.9a9.83 9.83 0 0 1 2.89 7c0 5.45-4.44 9.88-9.89 9.88M20.46 3.49A11.8 11.8 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.89c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65a11.9 11.9 0 0 0 5.68 1.45c6.55 0 11.89-5.34 11.89-11.89 0-3.18-1.24-6.17-3.48-8.42"/></symbol>
+  <symbol id="i-com" viewBox="0 0 24 24"><path d="M5.5 8.5h13l-1 11.5h-11z"/><path d="M9 8.5V7a3 3 0 0 1 6 0v1.5"/></symbol>
+  <symbol id="i-est" viewBox="0 0 24 24"><path d="M5 20.5V5l7-2.5L19 5v15.5"/><path d="M9 9h2M13 9h2M9 13h2M13 13h2M10.5 20.5V17h3v3.5"/></symbol>
+  <symbol id="i-per" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.4"/><path d="M5.5 20.5c.6-3.8 3.1-6 6.5-6s5.9 2.2 6.5 6"/></symbol>
+  <symbol id="i-chat" viewBox="0 0 24 24"><path d="M4 5.5h16v11H9l-5 4z"/><path d="M8 10h8M8 13h5"/></symbol>
+  <symbol id="i-doc" viewBox="0 0 24 24"><path d="M6 3.5h8.5L19 8v12.5H6z"/><path d="M14 3.5V8h5M9 12h6M9 15h6"/></symbol>
+  <symbol id="i-lap" viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="11" rx="2"/><path d="M2.5 19h19M9 16v3M15 16v3"/></symbol>
+  <symbol id="i-flag" viewBox="0 0 24 24"><path d="M6 21V4M6 4h11l-2 4 2 4H6"/></symbol>
+  <symbol id="i-capas" viewBox="0 0 24 24"><path d="m12 3 9 5-9 5-9-5 9-5Z"/><path d="m3 12 9 5 9-5M3 16l9 5 9-5"/></symbol>
+  <symbol id="i-escudo" viewBox="0 0 24 24"><path d="M12 3 20 6v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3Z"/><path d="m9 12 2 2 4-4"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m4 7 8 6 8-6"/></symbol>
+  <symbol id="i-ig" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="5"/><circle cx="12" cy="12" r="3.5"/></symbol>
+  <symbol id="i-cor" viewBox="0 0 24 24"><path d="M12 20.5s-7.5-4.4-7.5-9.4A4.1 4.1 0 0 1 12 8a4.1 4.1 0 0 1 7.5 3.1c0 5-7.5 9.4-7.5 9.4Z"/></symbol>
+</svg>
+
+<div class="fondo" aria-hidden="true">
+  <span class="mancha"><i></i></span><span class="mancha"><i></i></span><span class="mancha"><i></i></span><span class="mancha"><i></i></span>
+  <span class="grano"></span>
+</div>
+<div class="progreso" id="progreso"></div>
+
+<header class="barra" id="barra">
+  <a href="#inicio" aria-label="Punto Óptimo, ir al inicio"><picture><source srcset="assets/img/logo-blanco.svg" media="(prefers-color-scheme: dark)"><img src="assets/img/logo-color.svg" alt="" width="1765" height="780"></picture></a>
+  <ul id="menu">
+    <li><a href="#para-quien">Para quién</a></li>
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#cv">Tu CV</a></li>
+    <li><a href="#por-que">Por qué</a></li>
+    <li><a href="#proceso">Proceso</a></li>
+    <li><a href="#sobre-mi">Quién soy</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+  <a class="cta" data-config-href="whatsapp" href="#contacto" target="_blank" rel="noopener"><svg><use href="#wa"/></svg>Escribime</a>
+</header>
+
+<main>
+
+<section class="seccion pantalla portada" id="inicio">
+  <div class="marco">
+    <div class="texto">
+      <p class="lugar rv"><span aria-hidden="true">📍</span> Argentina</p>
+      <h1 class="rv" style="--i:1">Liquidación de sueldos y administración <em>para comercios.</em></h1>
+      <p class="rv" style="--i:2">Orden, precisión y trato cercano. Me encargo de los sueldos y los legajos para que puedas dedicarte a vender.</p>
+      <div class="acciones rv" style="--i:3">
+        <a class="cta" data-config-href="whatsapp" href="#contacto" target="_blank" rel="noopener"><svg><use href="#wa"/></svg>Escribime</a>
+        <a class="cta sec" href="#servicios">Ver servicios</a>
+      </div>
+    </div>
+    <div class="escena rv" style="--i:2" aria-hidden="true">
+      <svg class="lupa" viewBox="0 0 440 440">
+        <defs><linearGradient id="g" gradientUnits="userSpaceOnUse" x1="28" y1="28" x2="410" y2="410"><stop offset="0" stop-color="#59d1c5"/><stop offset=".55" stop-color="#2a9fc0"/><stop offset="1" stop-color="#166eb2"/></linearGradient></defs>
+        <path d="M316 316 410 410" fill="none" stroke="url(#g)" stroke-width="36"/><circle cx="410" cy="410" r="18" fill="url(#g)"/>
+        <circle cx="196" cy="196" r="168" fill="none" stroke="url(#g)" stroke-width="26"/>
+      </svg>
+      <div class="liq">
+        <small>Liquidación mensual</small>
+        <h3>Convenio de comercio</h3>
+        <ul>
+          <li><span>Haberes</span><span class="bar"><i style="--w:92%;--k:0"></i></span><span class="ok"><svg viewBox="0 0 24 24"><path d="m5.5 12.5 4.2 4.2L18.5 7.5"/></svg></span></li>
+          <li><span>Descuentos</span><span class="bar"><i style="--w:70%;--k:1"></i></span><span class="ok"><svg viewBox="0 0 24 24"><path d="m5.5 12.5 4.2 4.2L18.5 7.5"/></svg></span></li>
+          <li><span>Vacaciones</span><span class="bar"><i style="--w:55%;--k:2"></i></span><span class="ok"><svg viewBox="0 0 24 24"><path d="m5.5 12.5 4.2 4.2L18.5 7.5"/></svg></span></li>
+          <li><span>Legajo</span><span class="bar"><i style="--w:85%;--k:3"></i></span><span class="ok"><svg viewBox="0 0 24 24"><path d="m5.5 12.5 4.2 4.2L18.5 7.5"/></svg></span></li>
+        </ul>
+        <span class="estado">✓ Todo en orden</span>
+      </div>
+    </div>
+    <ul class="widgets rv" style="--i:4"><li class="widget" style="--k:0"><span class="wi"><svg viewBox="0 0 24 24"><use href="#i-doc"/></svg></span><span><b>Convenio de comercio</b><small>Liquidación de sueldos</small></span></li><li class="widget" style="--k:1"><span class="wi"><svg viewBox="0 0 24 24"><use href="#i-escudo"/></svg></span><span><b>Confidencialidad</b><small>Cuidado de tus datos</small></span></li><li class="widget" style="--k:2"><span class="wi"><svg viewBox="0 0 24 24"><use href="#i-cor"/></svg></span><span><b>Atención personalizada</b><small>Trato cercano</small></span></li></ul>
+  </div>
+</section>
+
+<section class="seccion pantalla" id="para-quien">
+  <div class="marco">
+    <header class="cabecera">
+      <h2 class="rv"><span class="gota"></span>Para quién trabajo</h2>
+      <p class="rv" style="--i:1">Me adapto a lo que cada uno necesita, sin vueltas.</p>
+    </header>
+    <div class="tres">
+      <article class="caso vidrio rv" style="--i:2">
+        <span class="ic"><svg viewBox="0 0 24 24"><use href="#i-com"/></svg></span>
+        <h3>Comercios y pymes</h3>
+        <p>Liquidar sueldos bien y a tiempo, legajos ordenados, cubrir un puesto.</p>
+        <ul class="lista"><li>Liquidación de sueldos (convenio de comercio)</li><li>Legajos, altas y bajas</li><li>Ausentismo y vacaciones</li></ul>
+        <a class="cta azul" data-config-href="whatsapp" data-mensaje="Hola, tengo un comercio y quiero consultarte por la liquidación de sueldos y la administración." href="#contacto" target="_blank" rel="noopener"><svg><use href="#wa"/></svg>Consultar por mi comercio</a>
+      </article>
+      <article class="caso vidrio rv" style="--i:3">
+        <span class="ic"><svg viewBox="0 0 24 24"><use href="#i-est"/></svg></span>
+        <h3>Estudios contables</h3>
+        <p>Un apoyo de confianza que liquida sueldos, sin tener que armar su propio sector.</p>
+        <ul class="lista"><li>Liquidación de sueldos tercerizada</li><li>Conciliaciones bancarias</li><li>Asistencia administrativa por horas</li></ul>
+        <a class="cta azul" data-config-href="whatsapp" data-mensaje="Hola, soy de un estudio contable y quiero consultarte por tercerizar la liquidación de sueldos." href="#contacto" target="_blank" rel="noopener"><svg><use href="#wa"/></svg>Consultar para mi estudio</a>
+      </article>
+      <article class="caso vidrio rv" style="--i:4">
+        <span class="ic"><svg viewBox="0 0 24 24"><use href="#i-per"/></svg></span>
+        <h3>Personas que buscan trabajo</h3>
+        <p>Un CV claro y preparación para entrevistas.</p>
+        <ul class="lista"><li>Diseño y rediseño de CV</li><li>Versión para enviar por WhatsApp</li><li>Preparación para entrevistas</li></ul>
+        <a class="cta azul" data-config-href="whatsapp" data-mensaje="Hola, estoy buscando trabajo y quiero consultarte por el CV y la preparación para entrevistas." href="#contacto" target="_blank" rel="noopener"><svg><use href="#wa"/></svg>Consultar por mi CV</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="seccion pantalla" id="servicios">
+  <div class="marco">
+    <header class="cabecera">
+      <h2 class="rv"><span class="gota"></span>Servicios</h2>
+      <p class="rv" style="--i:1">Sueldos, administración y personas, en un mismo lugar.</p>
+    </header>
+    <div class="tres">
+      <article class="caso vidrio principal rv" style="--i:2">
+        <span class="ic"><svg viewBox="0 0 24 24"><use href="#i-com"/></svg></span><span class="tag">Servicio principal</span>
+        <h3>Sueldos y administración</h3>
+        <p>Me encargo de la liquidación y del orden administrativo de tu comercio.</p>
+        <button class="mas-btn" type="button" aria-expanded="false">Más detalles</button>
+        <div class="detalle"><div><ul><li>Liquidación de sueldos (convenio de comercio)</li><li>Legajos, altas y bajas</li><li>Control de ausentismo y vacaciones</li><li>Conciliaciones bancarias</li><li>Asistencia administrativa virtual por horas</li></ul></div></div>
+      </article>
+      <article class="caso vidrio rv" style="--i:3">
+        <span class="ic"><svg viewBox="0 0 24 24"><use href="#i-doc"/></svg></span><span class="tag">Para personas</span>
+        <h3>CV y entrevistas</h3>
+        <p>Diseño y rediseño de CV, versión para enviar por WhatsApp y preparación para entrevistas.</p>
+        <button class="mas-btn" type="button" aria-expanded="false">Más detalles</button>
+        <div class="detalle"><div><ul><li>Diseño y rediseño de CV</li><li>Versión para WhatsApp</li><li>Preparación para entrevistas</li></ul></div></div>
+      </article>
+      <article class="caso vidrio rv" style="--i:4">
+        <span class="ic"><svg viewBox="0 0 24 24"><use href="#i-lap"/></svg></span><span class="tag">Para tu equipo</span>
+        <h3>Búsqueda de personal</h3>
+        <p>Descripción del puesto, publicación de la búsqueda, filtro de CV y primeras entrevistas.</p>
+        <button class="mas-btn" type="button" aria-expanded="false">Más detalles</button>
+        <div class="detalle"><div><ul><li>Perfil del puesto</li><li>Publicación de la búsqueda</li><li>Filtro de CV</li><li>Primeras entrevistas</li></ul></div></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="seccion pantalla" id="cv">
+  <div class="marco">
+    <header class="cabecera">
+      <h2 class="rv"><span class="gota"></span>Tu CV</h2>
+      <p class="rv" style="--i:1">Enviámelo y te ayudo a que llegue a donde tiene que llegar. Si querés, también lo mejoro.</p>
+    </header>
+    <div class="cv-grid">
+      <form class="cv-form vidrio rv" style="--i:2" id="cv-form" novalidate>
+        <fieldset class="cv-opciones">
+          <legend>¿Qué necesitás?</legend>
+          <label class="cv-op"><input type="radio" name="servicio" value="clasificar" checked><span><b>Que me orienten</b><small>Clasifico tu CV y te recomiendo dónde postularte. Sin costo.</small></span></label>
+          <label class="cv-op"><input type="radio" name="servicio" value="mejorar"><span><b>Mejorar mi CV</b><small>Te digo qué corregir y te entrego tu CV mejorado. <em data-cv-precio>Consultar precio</em></small></span></label>
+        </fieldset>
+        <div class="cv-campos">
+          <label>Nombre y apellido<input name="nombre" autocomplete="name" required maxlength="80" placeholder="Ej. Lucía Gómez"></label>
+          <label>WhatsApp o email<input name="contacto" autocomplete="email" required maxlength="120" placeholder="Ej. 3400 55-1234 o tu@email.com"></label>
+          <label>Ciudad o zona<input name="zona" autocomplete="address-level2" maxlength="80" placeholder="Ej. Tu ciudad"></label>
+          <label>Puesto o rubro que buscás<input name="rubro" maxlength="80" placeholder="Ej. Administración, ventas"></label>
+          <label class="cv-archivo"><span>Tu CV (PDF o Word, hasta <span data-cv-mb>5</span> MB)</span><span class="cv-drop"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 16V4m0 0-4 4m4-4 4 4M4 16v3a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><b data-cv-nombre>Tocá para elegir o soltá tu archivo acá</b></span><input type="file" name="cv" accept=".pdf,.doc,.docx,application/pdf" required></label>
+          <label class="cv-ancho">Algo que quieras contarme (opcional)<textarea name="mensaje" rows="3" maxlength="600"></textarea></label>
+        </div>
+        <input class="cv-trampa" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <label class="cv-ok"><input type="checkbox" name="consentimiento" required><span>Acepto que Punto Óptimo guarde mi CV y mis datos para orientarme y, si lo pido, mejorar mi CV. No se comparte con terceros sin mi permiso, y puedo pedir que lo borren cuando quiera.</span></label>
+        <p class="cv-estado" role="status" aria-live="polite"></p>
+        <button class="cta azul" type="submit">Enviar mi CV</button>
+      </form>
+      <div class="cv-listo vidrio" id="cv-listo" hidden>
+        <span class="cv-tilde" aria-hidden="true">✓</span>
+        <h3>¡Recibí tu CV!</h3>
+        <p class="cv-listo-txt"></p>
+        <p class="cv-cod">Tu código: <b id="cv-codigo"></b></p>
+        <div class="cv-listo-acc"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="seccion pantalla" id="por-que">
+  <div class="marco">
+    <header class="cabecera">
+      <h2 class="rv"><span class="gota"></span>Por qué Punto Óptimo</h2>
+      <p class="rv" style="--i:1">Lo que podés esperar cuando trabajamos juntos.</p>
+    </header>
+    <div class="porque">
+      <div class="mira rv" style="--i:2" aria-hidden="true">
+        <svg viewBox="0 0 420 420" focusable="false">
+          <defs><linearGradient id="mg" gradientUnits="userSpaceOnUse" x1="190" y1="190" x2="230" y2="230"><stop offset="0" stop-color="#59d1c5"/><stop offset="1" stop-color="#166eb2"/></linearGradient></defs>
+          <circle class="aro" style="--k:0" cx="210" cy="210" r="190"/>
+          <circle class="aro" style="--k:1" cx="210" cy="210" r="148"/>
+          <circle class="aro" style="--k:2" cx="210" cy="210" r="106"/>
+          <path class="cruz" d="M210 10v400M10 210h400"/>
+          <circle class="onda" cx="210" cy="210" r="18"/>
+          <circle class="punto" cx="210" cy="210" r="18"/>
+        </svg>
+        <span class="sen n" style="--k:0">Orden</span>
+        <span class="sen e" style="--k:1">Precisión</span>
+        <span class="sen s" style="--k:2">Trato cercano</span>
+        <span class="sen o" style="--k:3">Confidencialidad</span>
+      </div>
+      <div class="valores">
+        <article class="val vidrio rv" style="--i:2"><span class="ic"><svg viewBox="0 0 24 24"><use href="#i-capas"/></svg></span><h3>Todo en un mismo lugar</h3><p>Combino sueldos, administración y selección de personal en un solo lugar.</p></article>
+        <article class="val vidrio rv" style="--i:3"><span class="ic"><svg viewBox="0 0 24 24"><use href="#i-flag"/></svg></span><h3>Experiencia real</h3><p>En liquidación de sueldos del convenio de comercio, legajos y conciliaciones.</p></article>
+        <article class="val vidrio rv" style="--i:4"><span class="ic"><svg viewBox="0 0 24 24"><use href="#i-cor"/></svg></span><h3>Acompañamiento</h3><p>Atención personalizada durante todo el proceso.</p></article>
+        <article class="val vidrio rv" style="--i:5"><span class="ic"><svg viewBox="0 0 24 24"><use href="#i-escudo"/></svg></span><h3>Confidencialidad</h3><p>Trabajo con datos personales y de sueldos: su cuidado es parte del servicio.</p></article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="seccion pantalla" id="proceso">
+  <div class="marco">
+    <header class="cabecera">
+      <h2 class="rv"><span class="gota"></span>Cómo trabajamos</h2>
+      <p class="rv" style="--i:1">Un recorrido simple, de la primera charla al cierre.</p>
+    </header>
+    <div class="flujo" id="flujo">
+      <article class="paso vidrio"><span class="nodo"><svg viewBox="0 0 24 24"><use href="#i-chat"/></svg></span><span class="k">PASO 1</span><h3>Charlamos</h3><p>Me escribís y charlamos sobre lo que necesitás.</p></article>
+      <article class="paso vidrio"><span class="nodo"><svg viewBox="0 0 24 24"><use href="#i-doc"/></svg></span><span class="k">PASO 2</span><h3>Propuesta</h3><p>Armo una propuesta clara.</p></article>
+      <article class="paso vidrio"><span class="nodo"><svg viewBox="0 0 24 24"><use href="#i-lap"/></svg></span><span class="k">PASO 3</span><h3>Trabajamos</h3><p>Trabajamos juntos, todo online.</p></article>
+      <article class="paso vidrio"><span class="nodo"><svg viewBox="0 0 24 24"><use href="#i-flag"/></svg></span><span class="k">PASO 4</span><h3>Revisamos</h3><p>Revisamos que se haya cumplido el objetivo.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="seccion pantalla" id="sobre-mi">
+  <div class="marco quien">
+    <figure class="foto rv"><img src="assets/img/avatar.svg" alt="" loading="lazy"></figure>
+    <div class="q-txt">
+      <h2 class="rv" style="--i:1"><span class="gota"></span><span data-config="nombreResponsable">Responsable de Punto Óptimo</span></h2>
+      <p class="ent rv" style="--i:2">Técnica en Recursos Humanos. Trabajo con sueldos, legajos y administración para comercios, y ayudo a personas que buscan trabajo con su CV y sus entrevistas.</p>
+      <p class="rv" style="--i:3">Me gusta el trato cercano y el trabajo bien hecho: que cada liquidación llegue a tiempo, que cada legajo esté en orden y que cada persona se sienta acompañada.</p>
+      <div class="chips rv" style="--i:4"><span>Sueldos</span><span>Personas</span><span>Atención online</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="seccion pantalla" id="contacto">
+  <div class="marco">
+    <div class="panel-c rv">
+      <div class="c-izq">
+        <img src="assets/img/logo-blanco.svg" alt="" width="1765" height="780">
+        <h2>Hablemos</h2>
+        <p>Contame qué necesitás y te respondo a la brevedad. Cada propuesta se arma a medida.</p>
+        <a class="cta" data-config-href="whatsapp" href="#contacto" target="_blank" rel="noopener"><svg><use href="#wa"/></svg>Escribime por WhatsApp</a>
+      </div>
+      <div class="c-der">
+        <a href="#contacto" data-config-href="whatsapp" target="_blank" rel="noopener"><span class="wi"><svg viewBox="0 0 24 24" class="f"><use href="#wa"/></svg></span><span class="tx"><small>WhatsApp</small><span data-config="whatsappVisible">+54 9 0000 00-0000</span></span><span class="fl">↗</span></a>
+        <a href="#contacto" data-config-href="email"><span class="wi"><svg viewBox="0 0 24 24"><use href="#i-mail"/></svg></span><span class="tx"><small>Email</small><span data-config="email">contacto@ejemplo.com</span></span><span class="fl">↗</span></a>
+        <a href="#contacto" data-config-href="instagram" target="_blank" rel="noopener"><span class="wi"><svg viewBox="0 0 24 24"><use href="#i-ig"/></svg></span><span class="tx"><small>Instagram</small><span data-config="instagram">@puntooptimo</span></span><span class="fl">↗</span></a>
+      </div>
+    </div>
+    <p class="pie"><span data-config="ubicacion">Argentina</span> · Atención online · © <span data-config="anio">2026</span> <span data-config="nombre">Punto Óptimo</span></p>
+    <p class="aviso" data-aviso-pendientes hidden></p>
+    <a class="pie-panel" href="#" data-panel hidden>Ingresar</a>
+  </div>
+</section>
+
+</main>
+
+<!-- ========== SCRIPTS ========== -->
+<script src="js/config.js" defer></script>
+<script src="js/main.js" defer></script>
+<script src="js/diseno.js" defer></script>
+<script src="panel/demo-api.js"></script>
+<script src="js/cv.js" defer></script>
+</body>
+</html>

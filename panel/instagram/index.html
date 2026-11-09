@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Editor de publicaciones · Punto Óptimo</title>
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="editor.css">
+<script>if (/[?&]embebido/.test(location.search)) document.documentElement.classList.add("embebido");</script>
+</head>
+<body>
+<header class="barra">
+  <div>
+    <h1>Editor de publicaciones</h1>
+    <p>Elegí una plantilla, completá los textos y descargá las imágenes listas para Instagram.</p>
+  </div>
+  <button type="button" class="btn sec" id="btn-ejemplo">Volver al ejemplo</button>
+</header>
+
+<main class="editor">
+  <section class="panel" aria-label="Contenido">
+    <h2>1 · Plantilla</h2>
+    <div class="plantillas" id="plantillas" role="radiogroup" aria-label="Plantilla"></div>
+
+    <h2>2 · Textos</h2>
+    <div class="campos" id="campos"></div>
+
+    <h2>3 · Estilo</h2>
+    <div class="campos">
+      <div class="fila">
+        <span class="etq">Modo</span>
+        <div class="seg" id="tema" role="radiogroup" aria-label="Modo">
+          <button type="button" role="radio" data-v="oscuro" aria-checked="true">Oscuro</button>
+          <button type="button" role="radio" data-v="claro" aria-checked="false">Claro</button>
+        </div>
+      </div>
+      <div class="fila"><span class="etq">Diseño de fondo</span><div class="fondos" id="fondos" role="radiogroup" aria-label="Diseño de fondo"></div></div>
+      <label>Texto del pie<input id="pie" maxlength="60"></label>
+    </div>
+  </section>
+
+  <section class="vista" aria-label="Vista previa">
+    <div class="lienzo-caja"><canvas id="lienzo" width="1080" height="1350" role="img" aria-label="Vista previa de la lámina"></canvas></div>
+    <div class="nav">
+      <button type="button" class="btn sec" id="ant" aria-label="Lámina anterior">←</button>
+      <span id="contador" aria-live="polite">1 / 1</span>
+      <button type="button" class="btn sec" id="sig" aria-label="Lámina siguiente">→</button>
+    </div>
+    <div class="minis" id="minis" aria-label="Láminas"></div>
+    <div class="acciones">
+      <button type="button" class="btn" id="bajar-una">Descargar esta lámina</button>
+      <button type="button" class="btn sec" id="bajar-todas">Descargar todas</button>
+    </div>
+    <p class="nota" id="nota">Tamaño 1080 × 1350 px (formato vertical 4:5 de Instagram).</p>
+  </section>
+</main>
+
+<script src="logos-datos.js"></script>
+<script src="../../js/config.js"></script>
+<script src="editor.js"></script>
+</body>
+</html>

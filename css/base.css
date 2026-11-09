@@ -1,0 +1,189 @@
+/* ==========================================================================
+   BASE · Reset, estilos globales, tipografía y accesibilidad
+   ========================================================================== */
+
+/* ========== RESET ========== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  scroll-behavior: smooth;
+  /* El aire bajo la barra fija se define con scroll-margin-top en cada
+     sección (ver layout.css), no con scroll-padding: así no se suman los dos. */
+  background-color: var(--color-fondo);
+}
+
+body {
+  margin: 0;
+  min-height: 100svh;
+  overflow-x: hidden;
+  background-color: transparent;
+  color: var(--color-texto);
+  font-family: var(--fuente-texto);
+  font-size: var(--tamano-base);
+  font-weight: var(--peso-regular);
+  line-height: var(--linea-texto);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  margin: 0;
+  color: var(--color-titulo);
+  font-family: var(--fuente-titulos);
+  font-weight: var(--peso-semi);
+  letter-spacing: var(--interletrado-titulo);
+  line-height: var(--linea-titulo);
+  text-wrap: balance;
+}
+
+h1 {
+  font-size: var(--tamano-h1);
+  font-weight: var(--peso-bold);
+  line-height: 1.08;
+}
+
+h2 {
+  font-size: var(--tamano-h2);
+}
+
+h3 {
+  font-size: clamp(1.15rem, 2.5vw, 1.3125rem);
+}
+
+p {
+  margin: 0;
+}
+
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+img,
+picture,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+img {
+  height: auto;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button {
+  color: inherit;
+}
+
+a {
+  color: var(--color-enlace);
+  text-underline-offset: 0.2em;
+}
+
+a:hover {
+  color: var(--color-enlace-hover);
+}
+
+::selection {
+  background-color: var(--color-agua-tenue);
+  color: var(--color-tinta);
+}
+
+/* ========== FONDO ========== */
+/* La referencia usa un fondo plano muy claro; el halo quedó fuera para que
+   las tarjetas blancas sean las protagonistas. */
+.fondo {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background-color: var(--color-fondo);
+}
+
+/* ========== ACCESIBILIDAD ========== */
+:where(a, button, [tabindex]):focus-visible {
+  outline: 3px solid var(--color-foco);
+  outline-offset: 3px;
+  border-radius: var(--radio-xs);
+}
+
+.saltar-enlace {
+  position: absolute;
+  top: calc(var(--espacio-3) + env(safe-area-inset-top));
+  left: var(--espacio-3);
+  z-index: calc(var(--capa-nav) + 1);
+  padding: var(--espacio-3) var(--espacio-5);
+  border-radius: var(--radio-pildora);
+  background-color: var(--color-tinta);
+  color: var(--color-blanco);
+  font-weight: var(--peso-semi);
+  text-decoration: none;
+  transform: translateY(-160%);
+}
+
+.saltar-enlace:focus {
+  color: var(--color-blanco);
+  transform: translateY(0);
+}
+
+.solo-lectores {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+/* ========== PREFERENCIA DE MOVIMIENTO REDUCIDO ========== */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ==========================================================================
+   TIPOGRAFÍAS
+   Por ahora se cargan desde Google Fonts en el <head> de cada página.
+   Para pasarlas a local más adelante:
+   1. Descargar los archivos .woff2 de Montserrat y Poppins (pesos 400, 500,
+      600 y 700) desde fonts.google.com.
+   2. Guardarlos en assets/fonts/.
+   3. Reemplazar el <link> de Google Fonts por bloques @font-face acá abajo,
+      apuntando a "../assets/fonts/nombre-del-archivo.woff2".
+   4. Mantener las mismas variables --fuente-titulos y --fuente-texto.
+   ========================================================================== */

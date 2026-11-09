@@ -1,0 +1,764 @@
+/* Coolvetica del manual de marca: se activa al copiar los .woff2 en
+   assets/fonts/ (coolvetica-bold.woff2 y coolvetica-light.woff2). */
+@font-face {
+  font-family: "Coolvetica";
+  src: local("Coolvetica Bold"), local("Coolvetica-Bold"), url("../assets/fonts/coolvetica-bold.woff2") format("woff2");
+  font-weight: 600 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Coolvetica";
+  src: local("Coolvetica Light"), local("Coolvetica-Light"), url("../assets/fonts/coolvetica-light.woff2") format("woff2");
+  font-weight: 300 400;
+  font-display: swap;
+}
+
+/* ==========================================================================
+   ORGÁNICO · Capa de identidad visual
+   Se carga al final y reajusta el sitio hacia un estilo más natural y
+   minimalista, sin perder la limpieza tipo Apple: formas blandas que no son
+   círculos ni rectángulos perfectos, un fondo vivo, tipografía con carácter y
+   un diagrama de flujo que se dibuja al deslizar.
+   ========================================================================== */
+
+/* ========== TOKENS ========== */
+:root {
+  /* Manual de marca: Coolvetica Bold (títulos) y Light (secundaria). Si se
+     copian los archivos a assets/fonts/ se usan automáticamente; mientras
+     tanto Outfit es la alternativa más cercana: redondeada y amigable. */
+  --fuente-titulos: "Coolvetica", "Outfit", "Segoe UI", system-ui, sans-serif;
+
+  /* Papel cálido en vez de celeste de oficina. */
+  --color-fondo: #f6f7f3;
+  --color-fondo-alterno: #eef2ee;
+  --color-tarjeta: rgba(255, 255, 255, 0.62);
+  --color-tarjeta-borde: rgba(255, 255, 255, 0.85);
+  --color-borde: rgba(4, 52, 92, 0.14);
+
+  /* Formas "guijarro": cada esquina distinta. */
+  --forma-guijarro: 2.2rem 1.5rem 2.4rem 1.7rem;
+  --forma-guijarro-b: 1.6rem 2.4rem 1.7rem 2.2rem;
+  --forma-mancha: 58% 42% 55% 45% / 48% 58% 42% 52%;
+
+  --sombra-organica:
+    0 1px 0 rgba(255, 255, 255, 0.9) inset,
+    0 24px 50px -22px rgba(4, 52, 92, 0.22),
+    0 6px 14px -8px rgba(4, 52, 92, 0.1);
+
+  --fondo-mancha-1: rgba(89, 209, 197, 0.34);
+  --fondo-mancha-2: rgba(111, 183, 227, 0.4);
+  --fondo-mancha-3: rgba(255, 214, 170, 0.42);
+  --fondo-mancha-4: rgba(22, 110, 178, 0.2);
+  --fondo-hilo: rgba(22, 110, 178, 0.22);
+  --fondo-grano: 0.35;
+
+  /* Portada sobre el fondo vivo (en claro: texto oscuro). */
+  --portada-titulo: var(--color-tinta);
+  --portada-texto: #35505f;
+  --portada-etiqueta: #00776b;
+  --portada-etiqueta-borde: rgba(0, 143, 130, 0.4);
+  --portada-sello-fondo: rgba(255, 255, 255, 0.55);
+  --portada-sello-borde: rgba(4, 52, 92, 0.12);
+  --portada-sello-texto: #35505f;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-fondo: #05111a;
+    --color-tarjeta: rgba(255, 255, 255, 0.055);
+    --color-tarjeta-borde: rgba(255, 255, 255, 0.1);
+    --sombra-organica:
+      0 1px 0 rgba(255, 255, 255, 0.08) inset,
+      0 28px 56px -24px rgba(0, 0, 0, 0.6);
+
+    --fondo-mancha-1: rgba(89, 209, 197, 0.26);
+    --fondo-mancha-2: rgba(22, 110, 178, 0.4);
+    --fondo-mancha-3: rgba(120, 90, 200, 0.2);
+    --fondo-mancha-4: rgba(89, 209, 197, 0.14);
+    --fondo-hilo: rgba(127, 232, 221, 0.18);
+    --fondo-grano: 0.22;
+
+    --portada-titulo: #f2f8fb;
+    --portada-texto: #bcd3df;
+    --portada-etiqueta: #7fe8dd;
+    --portada-etiqueta-borde: rgba(89, 209, 197, 0.5);
+    --portada-sello-fondo: rgba(255, 255, 255, 0.06);
+    --portada-sello-borde: rgba(255, 255, 255, 0.16);
+    --portada-sello-texto: #bcd3df;
+  }
+}
+
+/* ========== FONDO VIVO ========== */
+.fondo {
+  overflow: hidden;
+  background:
+    radial-gradient(120% 80% at 50% -10%, rgba(255, 255, 255, 0.6), transparent 60%),
+    var(--color-fondo);
+}
+
+@media (prefers-color-scheme: dark) {
+  .fondo {
+    background:
+      radial-gradient(120% 80% at 50% -10%, rgba(22, 110, 178, 0.18), transparent 60%),
+      var(--color-fondo);
+  }
+}
+
+.fondo__mancha {
+  position: absolute;
+  width: var(--tam);
+  height: var(--tam);
+  left: var(--x);
+  top: var(--y);
+  /* Paralaje: el scroll empuja las manchas a ritmos distintos y el puntero
+     las inclina apenas. */
+  transform: translate3d(
+    calc(var(--fondo-x, 0) * var(--px, 30) * 1px + var(--fondo-scroll, 0) * var(--sx, 0) * 1vw),
+    calc(var(--fondo-y, 0) * var(--px, 30) * 1px + var(--fondo-scroll, 0) * var(--sy, -40) * 1vh),
+    0
+  );
+  will-change: transform;
+}
+
+.fondo__mancha i {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: var(--forma-mancha);
+  background: radial-gradient(
+    closest-side,
+    var(--color-mancha) 0%,
+    transparent 100%
+  );
+  animation: deriva var(--dur, 26s) ease-in-out infinite alternate;
+}
+
+.fondo__mancha--1 {
+  --tam: min(70vw, 54rem);
+  --x: -18vw;
+  --y: -14vh;
+  --px: 40;
+  --sx: 22;
+  --sy: -30;
+  --color-mancha: var(--fondo-mancha-1);
+  --dur: 28s;
+}
+
+.fondo__mancha--2 {
+  --tam: min(64vw, 50rem);
+  --x: 46vw;
+  --y: 4vh;
+  --px: -50;
+  --sx: -26;
+  --sy: -55;
+  --color-mancha: var(--fondo-mancha-2);
+  --dur: 34s;
+}
+
+.fondo__mancha--3 {
+  --tam: min(60vw, 46rem);
+  --x: 8vw;
+  --y: 52vh;
+  --px: 60;
+  --sx: 30;
+  --sy: -70;
+  --color-mancha: var(--fondo-mancha-3);
+  --dur: 31s;
+}
+
+.fondo__mancha--4 {
+  --tam: min(56vw, 42rem);
+  --x: 52vw;
+  --y: 62vh;
+  --px: -30;
+  --sx: -20;
+  --sy: -45;
+  --color-mancha: var(--fondo-mancha-4);
+  --dur: 38s;
+}
+
+.fondo__mancha--2 i {
+  animation-direction: alternate-reverse;
+}
+
+.fondo__mancha--4 i {
+  animation-direction: alternate-reverse;
+}
+
+@keyframes deriva {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(0deg) scale(1);
+    border-radius: 58% 42% 55% 45% / 48% 58% 42% 52%;
+  }
+  50% {
+    transform: translate3d(6%, -5%, 0) rotate(40deg) scale(1.1);
+    border-radius: 42% 58% 46% 54% / 56% 44% 58% 42%;
+  }
+  100% {
+    transform: translate3d(-5%, 6%, 0) rotate(80deg) scale(0.96);
+    border-radius: 52% 48% 60% 40% / 42% 56% 44% 58%;
+  }
+}
+
+/* Hilos: líneas fluidas que acompañan el scroll como curvas de nivel. */
+.fondo__hilos {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  fill: none;
+  transform: translate3d(0, calc(var(--fondo-scroll, 0) * -14vh), 0);
+}
+
+.fondo__hilos path {
+  stroke: var(--fondo-hilo);
+  stroke-width: 1.2;
+  vector-effect: non-scaling-stroke;
+}
+
+/* Grano fino: quita lo "digital" de los degradados. */
+.fondo__grano {
+  position: absolute;
+  inset: 0;
+  opacity: var(--fondo-grano);
+  mix-blend-mode: soft-light;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .5 0 0 0 0 .5 0 0 0 0 .5 0 0 0 .55 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+
+/* ========== TIPOGRAFÍA ========== */
+h1,
+h2 {
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+h3 {
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+h1 {
+  font-size: clamp(2.3rem, 6.8vw, 4rem);
+  line-height: 1.04;
+}
+
+h2 {
+  font-size: clamp(1.9rem, 4.4vw, 2.8rem);
+}
+
+/* El punto de marca pasa a ser una gota viva. */
+.seccion__encabezado h2::before {
+  width: 0.95rem;
+  height: 0.95rem;
+  border-radius: var(--forma-mancha);
+  animation: gota 9s ease-in-out infinite alternate;
+}
+
+@keyframes gota {
+  to {
+    border-radius: 44% 56% 42% 58% / 58% 42% 56% 44%;
+    transform: rotate(40deg) scale(1.12);
+  }
+}
+
+.seccion__bajada {
+  font-weight: 400;
+}
+
+/* ========== PORTADA ========== */
+.portada {
+  background: transparent;
+  color: var(--portada-texto);
+}
+
+.portada__titulo {
+  color: var(--portada-titulo);
+  max-width: 17ch;
+  letter-spacing: -0.03em;
+}
+
+.portada__texto {
+  color: var(--portada-texto);
+}
+
+.portada__lugar {
+  border-color: var(--portada-etiqueta-borde);
+  background: var(--portada-sello-fondo);
+  color: var(--portada-etiqueta);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+
+/* Subrayado hecho a mano: una pincelada ondulada en vez de una banda recta. */
+.portada__destacado {
+  color: var(--color-azul);
+  background-image: none;
+  position: relative;
+  white-space: nowrap;
+  padding-inline: 0;
+}
+
+.portada__destacado::after {
+  content: "";
+  position: absolute;
+  left: -1%;
+  right: -1%;
+  bottom: -0.12em;
+  height: 0.32em;
+  background: no-repeat center / 100% 100%
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 14' preserveAspectRatio='none'><path d='M2 9C30 2 52 13 84 7S142 3 198 8' fill='none' stroke='%2359d1c5' stroke-width='4.5' stroke-linecap='round'/></svg>");
+  transform-origin: left center;
+  animation: trazar 1.4s 0.9s var(--ease-out) both;
+}
+
+@keyframes trazar {
+  from {
+    transform: scaleX(0);
+  }
+}
+
+.portada__sello {
+  border-color: var(--portada-sello-borde);
+  background: var(--portada-sello-fondo);
+  color: var(--portada-sello-texto);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+
+/* Botón secundario de la portada: sigue el color del tema. */
+.portada .boton--secundario {
+  border-color: var(--portada-sello-borde);
+  background-color: var(--portada-sello-fondo);
+  color: var(--portada-titulo);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+
+.portada .boton--secundario:hover {
+  border-color: var(--portada-etiqueta-borde);
+  background-color: var(--portada-sello-fondo);
+  color: var(--portada-titulo);
+}
+
+/* Barra flotante: más sólida sobre el fondo claro. */
+:root {
+  --nav-fondo: rgba(6, 42, 76, 0.84);
+}
+
+/* ========== TARJETAS: vidrio esmerilado y formas guijarro ========== */
+.tarjeta,
+.por-que__item,
+.hito__tarjeta {
+  border: 1px solid var(--color-tarjeta-borde);
+  background-color: var(--color-tarjeta);
+  box-shadow: var(--sombra-organica);
+  -webkit-backdrop-filter: blur(18px) saturate(150%);
+  backdrop-filter: blur(18px) saturate(150%);
+}
+
+.tarjeta {
+  border-radius: var(--forma-guijarro);
+}
+
+.tarjeta:nth-child(2) {
+  border-radius: var(--forma-guijarro-b);
+}
+
+.por-que__item {
+  border-radius: var(--forma-guijarro);
+}
+
+.por-que__item:nth-child(even) {
+  border-radius: var(--forma-guijarro-b);
+}
+
+.servicio {
+  border-radius: 2.6rem 1.8rem 2.8rem 2rem;
+}
+
+.servicio--secundario {
+  border-radius: var(--forma-guijarro);
+  border-color: var(--color-tarjeta-borde);
+  background-color: var(--color-tarjeta);
+  box-shadow: var(--sombra-organica);
+  -webkit-backdrop-filter: blur(18px) saturate(150%);
+  backdrop-filter: blur(18px) saturate(150%);
+}
+
+.servicios__lado .servicio--secundario:nth-child(2) {
+  border-radius: var(--forma-guijarro-b);
+}
+
+/* Iconos: de círculos perfectos a piedras suaves. */
+.tarjeta__icono,
+.servicio__icono,
+.por-que__icono {
+  border-radius: var(--forma-mancha);
+}
+
+/* ========== RETRATO: forma de piedra de río ========== */
+.quien__retrato,
+.quien__foto {
+  border-radius: var(--forma-mancha);
+}
+
+.quien__retrato {
+  animation: deriva-forma 16s ease-in-out infinite alternate;
+}
+
+.quien__foto {
+  animation: deriva-forma 16s ease-in-out infinite alternate;
+}
+
+@keyframes deriva-forma {
+  to {
+    border-radius: 46% 54% 42% 58% / 56% 44% 58% 42%;
+  }
+}
+
+.quien__halo {
+  border-radius: var(--forma-mancha);
+  filter: blur(26px);
+}
+
+/* ========== CONTACTO ========== */
+.contacto__panel {
+  border-radius: 3rem 2rem 3.2rem 2.2rem;
+  background-image:
+    radial-gradient(60% 80% at 100% 0%, rgba(89, 209, 197, 0.3), transparent 70%),
+    radial-gradient(50% 70% at 0% 100%, rgba(22, 110, 178, 0.45), transparent 70%);
+}
+
+.contacto__panel::after {
+  border-radius: var(--forma-mancha);
+  animation: deriva-forma 14s ease-in-out infinite alternate;
+}
+
+/* ========== DIAGRAMA DE FLUJO · CÓMO TRABAJAMOS ========== */
+.ruta {
+  --ruta-px: 0px;
+  --eje-x: 1.375rem;
+  position: relative;
+  display: grid;
+  gap: 2rem;
+  padding-block: 0.25rem;
+}
+
+/* Eje: riel tenue + trazo vivo que baja con el scroll. */
+.ruta__eje {
+  position: absolute;
+  top: 1rem;
+  bottom: 1rem;
+  left: var(--eje-x);
+  width: 3px;
+  margin-left: -1.5px;
+  border-radius: 3px;
+  background: var(--color-borde);
+  pointer-events: none;
+}
+
+.ruta__relleno {
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: var(--ruta-px);
+  border-radius: 3px;
+  background: linear-gradient(180deg, var(--color-azul), var(--color-agua));
+  box-shadow: 0 0 14px rgba(89, 209, 197, 0.55);
+}
+
+/* Cabeza luminosa que "escribe" el trazo. */
+.ruta__relleno::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -6px;
+  width: 12px;
+  height: 12px;
+  margin-left: -6px;
+  border-radius: 50%;
+  background: var(--color-agua);
+  box-shadow: 0 0 0 4px rgba(89, 209, 197, 0.25), 0 0 18px var(--color-agua);
+}
+
+.ruta__extremo {
+  position: relative;
+  z-index: 1;
+  justify-self: start;
+  margin-left: calc(var(--eje-x) - 0.1rem);
+  padding: 0.55rem 1.1rem 0.55rem 2rem;
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radio-pildora);
+  background: var(--color-fondo);
+  color: var(--color-texto-suave);
+  font-family: var(--fuente-texto);
+  font-size: var(--tamano-xs);
+  font-weight: var(--peso-semi);
+  letter-spacing: var(--interletrado-etiqueta);
+  text-transform: uppercase;
+  transition: all var(--duracion-lenta) var(--ease-out);
+}
+
+.ruta__extremo::before {
+  content: "";
+  position: absolute;
+  left: 0.8rem;
+  top: 50%;
+  width: 0.55rem;
+  height: 0.55rem;
+  margin-top: -0.275rem;
+  border-radius: 50%;
+  background: var(--color-borde);
+  transition: background var(--duracion-lenta) var(--ease-out);
+}
+
+.ruta__extremo.esta-activo {
+  border-color: transparent;
+  background: var(--color-azul);
+  color: var(--color-blanco);
+  box-shadow: 0 10px 26px -10px rgba(22, 110, 178, 0.6);
+}
+
+.ruta__extremo.esta-activo::before {
+  background: var(--color-blanco);
+}
+
+.ruta__lista {
+  display: grid;
+  gap: 2.25rem;
+}
+
+.hito {
+  position: relative;
+  display: grid;
+  grid-template-columns: 2.75rem minmax(0, 1fr);
+  column-gap: 1.5rem;
+  align-items: center;
+  margin-left: calc(var(--eje-x) - 1.375rem);
+}
+
+.hito__nodo {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border: 2px solid var(--color-borde);
+  border-radius: var(--forma-mancha);
+  background: var(--color-fondo);
+  color: var(--color-texto-suave);
+  transition:
+    background var(--duracion-lenta) var(--ease-out),
+    color var(--duracion-lenta) var(--ease-out),
+    border-color var(--duracion-lenta) var(--ease-out),
+    transform 0.6s var(--ease-out),
+    box-shadow var(--duracion-lenta) var(--ease-out);
+}
+
+.hito__nodo .icono {
+  width: 1.3rem;
+  height: 1.3rem;
+}
+
+.hito.esta-activo .hito__nodo {
+  border-color: transparent;
+  background: linear-gradient(150deg, var(--color-azul), var(--color-agua-oscuro));
+  color: var(--color-blanco);
+  transform: scale(1.08) rotate(-4deg);
+  box-shadow:
+    0 0 0 6px rgba(89, 209, 197, 0.16),
+    0 14px 26px -10px rgba(22, 110, 178, 0.55);
+}
+
+/* Conector con punta de flecha: sale del nodo hacia la tarjeta. */
+.hito__nodo::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  width: 1.5rem;
+  height: 2px;
+  margin-top: -1px;
+  background: linear-gradient(90deg, var(--color-agua), var(--color-azul-claro));
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.7s 0.15s var(--ease-out);
+}
+
+.hito.esta-activo .hito__nodo::after {
+  transform: scaleX(1);
+}
+
+.hito__tarjeta {
+  position: relative;
+  display: grid;
+  gap: 0.3rem;
+  padding: 1.2rem 1.4rem 1.3rem;
+  border-radius: var(--forma-guijarro);
+  opacity: 0;
+  transform: translate3d(1.5rem, 0, 0) scale(0.97);
+  transition:
+    opacity 0.7s 0.2s var(--ease-out),
+    transform 0.8s 0.2s var(--ease-out);
+}
+
+.hito.esta-activo .hito__tarjeta {
+  opacity: 1;
+  transform: none;
+}
+
+/* Punta de flecha en el borde de la tarjeta. */
+.hito__tarjeta::before {
+  content: "";
+  position: absolute;
+  left: -0.15rem;
+  top: 50%;
+  width: 0.7rem;
+  height: 0.7rem;
+  margin-top: -0.35rem;
+  border-right: 2px solid var(--color-azul-claro);
+  border-top: 2px solid var(--color-azul-claro);
+  transform: rotate(45deg) scale(0);
+  transition: transform 0.5s 0.55s var(--ease-out);
+}
+
+.hito.esta-activo .hito__tarjeta::before {
+  transform: rotate(45deg) scale(1);
+}
+
+.hito__numero {
+  color: var(--color-agua-oscuro);
+  font-family: var(--fuente-titulos);
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+}
+
+@media (prefers-color-scheme: dark) {
+  .hito__numero {
+    color: var(--color-agua-claro);
+  }
+}
+
+.hito__titulo {
+  font-size: 1.35rem;
+}
+
+/* Sin JS el diagrama completo queda visible. */
+html:not(.js) .hito__tarjeta,
+.ruta--completa .hito__tarjeta {
+  opacity: 1;
+  transform: none;
+}
+
+html:not(.js) .hito__nodo::after,
+.ruta--completa .hito__nodo::after {
+  transform: scaleX(1);
+}
+
+html:not(.js) .hito__tarjeta::before,
+.ruta--completa .hito__tarjeta::before {
+  transform: rotate(45deg) scale(1);
+}
+
+html:not(.js) .ruta__relleno {
+  height: 100%;
+}
+
+/* Escritorio: el eje pasa al centro y los pasos se alternan a izquierda y
+   derecha, como un diagrama de flujo. */
+@media (min-width: 860px) {
+  .ruta {
+    --eje-x: 50%;
+    gap: 2.5rem;
+  }
+
+  .ruta__extremo {
+    justify-self: center;
+    margin-left: 0;
+  }
+
+  .ruta__lista {
+    gap: 0;
+  }
+
+  .hito {
+    grid-template-columns: minmax(0, 1fr) 3.25rem minmax(0, 1fr);
+    column-gap: 2.25rem;
+    margin-left: 0;
+    padding-block: 1.1rem;
+  }
+
+  .hito__nodo {
+    grid-column: 2;
+    grid-row: 1;
+    width: 3.25rem;
+    height: 3.25rem;
+  }
+
+  .hito__tarjeta {
+    grid-row: 1;
+    max-width: 23rem;
+  }
+
+  /* Impares a la derecha, pares a la izquierda. */
+  .hito:nth-child(odd) .hito__tarjeta {
+    grid-column: 3;
+  }
+
+  .hito:nth-child(even) .hito__tarjeta {
+    grid-column: 1;
+    justify-self: end;
+    text-align: right;
+    transform: translate3d(-1.5rem, 0, 0) scale(0.97);
+  }
+
+  .hito:nth-child(even).esta-activo .hito__tarjeta {
+    transform: none;
+  }
+
+  .ruta--completa .hito:nth-child(even) .hito__tarjeta,
+  html:not(.js) .hito:nth-child(even) .hito__tarjeta {
+    transform: none;
+  }
+
+  .hito:nth-child(even) .hito__nodo::after {
+    left: auto;
+    right: 100%;
+    background: linear-gradient(270deg, var(--color-agua), var(--color-azul-claro));
+    transform-origin: right center;
+  }
+
+  .hito:nth-child(even) .hito__tarjeta::before {
+    left: auto;
+    right: -0.15rem;
+    border-right: 0;
+    border-top: 0;
+    border-left: 2px solid var(--color-azul-claro);
+    border-bottom: 2px solid var(--color-azul-claro);
+  }
+
+  .hito__nodo::after {
+    width: 2.25rem;
+  }
+}
+
+/* ========== MOVIMIENTO REDUCIDO ========== */
+@media (prefers-reduced-motion: reduce) {
+  .fondo__mancha i,
+  .seccion__encabezado h2::before,
+  .quien__retrato,
+  .quien__foto,
+  .contacto__panel::after,
+  .portada__destacado::after {
+    animation: none !important;
+  }
+
+  .hito__tarjeta,
+  .hito__nodo::after,
+  .hito__tarjeta::before {
+    transition: none;
+  }
+}

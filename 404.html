@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+  <!-- ========== METADATOS ========== -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Página no encontrada | Punto Óptimo</title>
+  <meta name="description" content="La página que buscás no existe o cambió de dirección.">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#eef6fa" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#06131c" media="(prefers-color-scheme: dark)">
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+
+  <!-- ========== TIPOGRAFÍAS ========== -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- ========== ESTILOS ========== -->
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+</head>
+<body>
+  <div class="fondo" aria-hidden="true"></div>
+
+  <!-- ========== CONTENIDO: ERROR 404 ========== -->
+  <main class="pagina-error">
+    <div class="pagina-error__panel vidrio">
+      <a class="marca pagina-error__marca" href="index.html" aria-label="Punto Óptimo, volver al inicio">
+        <picture>
+          <source srcset="assets/img/logo-blanco.svg" media="(prefers-color-scheme: dark)">
+          <img class="marca__imagen" src="assets/img/logo-color.svg" alt="" width="1765" height="780">
+        </picture>
+      </a>
+
+      <p class="etiqueta">Error 404</p>
+      <h1>No encontramos esta página.</h1>
+      <p class="pagina-error__texto">Puede que el enlace haya cambiado o que la dirección esté mal escrita. Volvé al inicio para seguir navegando.</p>
+      <a class="boton boton--primario" href="index.html">Volver al inicio</a>
+    </div>
+  </main>
+</body>
+</html>

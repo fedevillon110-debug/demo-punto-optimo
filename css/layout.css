@@ -1,0 +1,95 @@
+/* ==========================================================================
+   LAYOUT · Contenedores, secciones, grillas y utilidades de espaciado
+   Mobile first: las columnas se suman con min-width.
+   ========================================================================== */
+
+/* ========== CONTENEDORES ========== */
+.contenedor {
+  width: 100%;
+  max-width: var(--contenedor);
+  margin-inline: auto;
+  padding-inline: clamp(var(--espacio-5), 4vw, var(--espacio-6));
+}
+
+.contenedor--angosto {
+  max-width: var(--contenedor-angosto);
+}
+
+.contenedor--texto {
+  max-width: var(--contenedor-texto);
+}
+
+/* ========== SECCIONES ========== */
+/* Cada sección real tiene id y scroll-margin-top para que la barra fija no
+   tape el título al navegar (ver también base.css). */
+.seccion,
+.portada {
+  scroll-margin-top: var(--scroll-margen);
+}
+
+.seccion {
+  position: relative;
+  padding-top: var(--seccion-espacio);
+}
+
+.seccion__encabezado {
+  display: grid;
+  gap: var(--espacio-2);
+  max-width: 46rem;
+  margin-bottom: clamp(var(--espacio-6), 5vw, var(--espacio-7));
+}
+
+/* Punto de marca antes del título, como en la papelería de Punto Óptimo. */
+.seccion__encabezado h2 {
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+}
+
+.seccion__encabezado h2::before {
+  content: "";
+  flex: 0 0 auto;
+  width: 0.875rem;
+  height: 0.875rem;
+  border-radius: 50%;
+  background: var(--gradiente-marca);
+}
+
+.seccion__bajada {
+  max-width: 58ch;
+  color: var(--color-texto-suave);
+  font-size: var(--tamano-lg);
+}
+
+/* ========== GRILLAS ========== */
+.grilla {
+  display: grid;
+  gap: var(--espacio-5);
+}
+
+@media (min-width: 640px) {
+  .grilla--2,
+  .grilla--3,
+  .grilla--4 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 900px) {
+  .grilla--3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1000px) {
+  .grilla--4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+/* ========== UTILIDADES ========== */
+.pila {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espacio-4);
+}
